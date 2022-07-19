@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  php:
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    working_dir: /var/www/asuro-calc
+    volumes:
+      - .:/var/www/asuro-calc
+      - ./docker/php-ext/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./docker/sites-available/:/etc/apache2/sites-available
+    ports:
+      - "80:80"
