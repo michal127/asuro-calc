@@ -6,7 +6,10 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions
-RUN install-php-extensions iconv pcre session ctype tokenizer zip
+RUN install-php-extensions iconv pcre session ctype tokenizer zip xdebug
+
+RUN a2enmod rewrite
+RUN apache2ctl restart
 
 CMD ["apache2-foreground"]
 
